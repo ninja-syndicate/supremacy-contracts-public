@@ -7,55 +7,64 @@ import "@openzeppelin/contracts/interfaces/IERC721.sol";
 
 /// @custom:security-contact privacy-admin@supremacy.game
 contract Staking is Ownable {
-	IERC721 private immutable SupNFTContract;
-
 	// track staked Token IDs to addresses to return to
-	mapping(uint256 => address) public StakedIDs;
-	mapping(uint256 => bool) public LockedIDs;
-
-	constructor(address _nftContract) {
-		SupNFTContract = ERC721(_nftContract);
+	struct stakingStatus {
+		address stakedBy;
+		bool locked;
 	}
+	mapping(address => mapping(uint256 => stakingStatus)) public records;
+
+	constructor() {}
 
 	// remap changes the owner of an NFT
 	// is used reconcile multiple transfers that have happened offchain
-	function remap(uint256 tokenId, address newAddr) public onlyOwner {
-		StakedIDs[tokenId] = newAddr;
-		emit Remap(tokenId, newAddr);
+	function remap(
+		address collection,
+		uint256 tokenId,
+		address newAddr
+	) public onlyOwner {
+		records[collection][tokenId].stakedBy = newAddr;
+		emit Remap(collection, tokenId, newAddr);
 	}
 
 	// lock prevents change owners of an NFT
-	function lock(uint256 tokenId) public onlyOwner {
-		LockedIDs[tokenId] = true;
-		emit Lock(tokenId);
+	function lock(address collection, uint256 tokenId) public onlyOwner {
+		records[collection][tokenId].locked = true;
+		emit Lock(collection, tokenId);
 	}
 
 	// unlock allows changing owners of an NFT
-	function unlock(uint256 tokenId) public onlyOwner {
-		LockedIDs[tokenId] = false;
-		emit Unlock(tokenId);
+	function unlock(address collection, uint256 tokenId) public onlyOwner {
+		records[collection][tokenId].locked = false;
+		emit Unlock(collection, tokenId);
 	}
 
 	// stake registers the asset into the game
-	function stake(uint256 tokenId) public {
-		SupNFTContract.transferFrom(msg.sender, address(this), tokenId);
-		StakedIDs[tokenId] = msg.sender;
-		emit Staked(msg.sender, tokenId);
+	function stake(address collection, uint256 tokenId) public {
+		IERC721 nftContract = ERC721(collection);
+		require(
+			nftContract.ownerOf(tokenId) == msg.sender,
+			"you are not the owner of this token"
+		);
+		nftContract.transferFrom(msg.sender, address(this), tokenId);
+		records[collection][tokenId].stakedBy = msg.sender;
+		emit Staked(collection, msg.sender, tokenId);
 	}
 
 	// unstake deregisters the asset from the game
-	function unstake(uint256 tokenId) public {
-		address to = StakedIDs[tokenId];
-		require(!LockedIDs[tokenId], "token is locked");
+	function unstake(address collection, uint256 tokenId) public {
+		IERC721 nftContract = ERC721(collection);
+		address to = records[collection][tokenId].stakedBy;
+		require(!records[collection][tokenId].locked, "token is locked");
 		require(to == msg.sender, "you are not the staker");
-		SupNFTContract.transferFrom(address(this), to, tokenId);
-		StakedIDs[tokenId] = address(0x0);
-		emit Unstaked(to, tokenId);
+		nftContract.transferFrom(address(this), to, tokenId);
+		records[collection][tokenId].stakedBy = address(0x0);
+		emit Unstaked(collection, to, tokenId);
 	}
 
-	event Lock(uint256 tokenId);
-	event Unlock(uint256 tokenId);
-	event Remap(uint256 tokenId, address newAddr);
-	event Staked(address owner, uint256 tokenId);
-	event Unstaked(address owner, uint256 tokenId);
+	event Lock(address collection, uint256 tokenId);
+	event Unlock(address collection, uint256 tokenId);
+	event Remap(address collection, uint256 tokenId, address newAddr);
+	event Staked(address collection, address owner, uint256 tokenId);
+	event Unstaked(address collection, address owner, uint256 tokenId);
 }

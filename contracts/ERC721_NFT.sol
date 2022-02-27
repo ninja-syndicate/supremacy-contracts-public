@@ -42,12 +42,13 @@ import "./Crypto_SignatureVerifier.sol";
 contract NFT is ERC721, ERC721Enumerable, SignatureVerifier, Ownable {
 	mapping(address => uint256) public nonces;
 
-	string baseURI = "https://nft.supremacy.game/api/metadata/";
+	string baseURI;
 
-	constructor(address signer)
-		ERC721("Supremacy NFTs", "SUPNFT")
-		SignatureVerifier(signer)
-	{}
+	constructor(
+		address signer,
+		string memory name,
+		string memory symbol
+	) ERC721(name, symbol) SignatureVerifier(signer) {}
 
 	function _baseURI() internal view override returns (string memory) {
 		return baseURI;
@@ -91,6 +92,7 @@ contract NFT is ERC721, ERC721Enumerable, SignatureVerifier, Ownable {
 		require(expiry > block.timestamp, "signature expired");
 		bytes32 messageHash = getMessageHash(
 			msg.sender,
+			address(this),
 			tokenID,
 			nonces[msg.sender]++,
 			expiry
@@ -103,11 +105,15 @@ contract NFT is ERC721, ERC721Enumerable, SignatureVerifier, Ownable {
 	// getMessageHash builds the hash for signature verification
 	function getMessageHash(
 		address account,
+		address collectionAddr,
 		uint256 tokenID,
 		uint256 nonce,
 		uint256 expiry
 	) internal pure returns (bytes32) {
-		return keccak256(abi.encode(account, tokenID, nonce, expiry));
+		return
+			keccak256(
+				abi.encode(account, collectionAddr, tokenID, nonce, expiry)
+			);
 	}
 
 	function _beforeTokenTransfer(

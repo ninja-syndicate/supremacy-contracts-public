@@ -16,6 +16,10 @@ Files:
 
 Contracts
 
+- [ETH Core] NFT V2 Genesis contract deployed to: 0x651D4424F34e6e918D8e4D2Da4dF3DEbDAe83D0C
+- [ETH Core] NFT V2 Standard contract deployed to: 0x52d7A31e2f5CfA6De6BABb2787c0dF842298f5e6
+- [ETH Core] NFT Staking V2 contract deployed to: 0x6476dB7cFfeeBf7Cc47Ed8D4996d1D60608AAf95
+
 - [ETH Core] NFT contract deployed to: 0x24447528deb67F492Af4AF7fb3Afb89476e0bCfD
 - [ETH Core] Staking contract deployed to: 0xaD0ABD755cD93cad2fe2f1CAeb9257Eb791e2059
 - [BSC Core] SUPS ERC20 contract deployed to: 0xc99cFaA8f5D9BD9050182f29b83cc9888C5846C4
@@ -41,6 +45,8 @@ Wallets
 
 Contracts
 
+- [ETH Core] NFT V2 contract deployed to: 0xEEfaF47acaa803176F1711c1cE783e790E4E750D
+- [ETH Core] NFT Staking V2 contract deployed to: 0x0497e0F8FC07DaaAf2BC1da1eace3F5E60d008b8
 - [ETH Core] NFT contract deployed to: 0xC1ce98F52E771Bd82938c4Cb6CCaA40Dc2B3258D
 - [ETH Core] Staking contract deployed to: 0xceED4Db9234e7374fe3132a2610c31275712685C
 
