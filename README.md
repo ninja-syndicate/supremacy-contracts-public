@@ -52,7 +52,8 @@ Tokens
 
 Wallets
 
-- [ETH Goerli] [BSC Testnet] Operator: 0xc01c2f6DD7cCd2B9F8DB9aa1Da9933edaBc5079E
+- [ETH Goerli] [BSC Testnet] Operator 2: 0x5591eBC09A89A8B11D9644eC1455e294Fd3BAbB5
+- [ETH Goerli] [BSC Testnet] Operator Legacy: 0xc01c2f6DD7cCd2B9F8DB9aa1Da9933edaBc5079E
 - [ETH Goerli] [BSC Testnet] Treasury/Purchase: 0x7D6439fDF9B096b29b77afa28b3083c0a329c7fE
 
 Contracts
