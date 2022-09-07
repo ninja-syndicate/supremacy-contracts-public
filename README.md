@@ -25,9 +25,11 @@ npx hardhat coverage
 
 Contracts
 
+- [ETH Core] NFT V2 General contract deployed to: 0x01cE218503b68B3cD40B35Dc46e4c92bd982456E
 - [ETH Core] NFT V2 Limited contract deployed to: 0xCA949036Ad7cb19C53b54BdD7b358cD12Cf0b810
 - [ETH Core] NFT V2 Genesis contract deployed to: 0x651D4424F34e6e918D8e4D2Da4dF3DEbDAe83D0C
 - [ETH Core] NFT V2 Standard contract deployed to: 0x52d7A31e2f5CfA6De6BABb2787c0dF842298f5e6
+- [ETH Core] NFT Staking V3 contract deployed to: 0xEe53F6fbFfC8EB14f35f3CC894372809951A2299
 - [ETH Core] NFT Staking V2 contract deployed to: 0x6476dB7cFfeeBf7Cc47Ed8D4996d1D60608AAf95
 - [BSC Core] Yield Farming deployed to: 0x768F80c7B256cf921F8C557CeC9D0Bd97766f253
 - [BSC Core] Withdrawer contract deployed to: 0x6476dB7cFfeeBf7Cc47Ed8D4996d1D60608AAf95
@@ -58,10 +60,13 @@ Wallets
 
 Contracts
 
+- [ETH Goerli] NFT General contract deployed to: 0x7263BffbD311CE7A3ddDfC0101156a47bc686ce8
 - [ETH Goerli] NFT Limited V2 contract deployed to: 0x440e2CcE53F5a61Bb997ac67D8D45a2898daD27b
 - [ETH Goerli] NFT Genesis V2 contract deployed to: 0xEEfaF47acaa803176F1711c1cE783e790E4E750D
+- [ETH Goerli] NFT Staking V3 contract deployed to: 0x9DAcEA338E4DDd856B152Ce553C7540DF920Bb15
 - [ETH Goerli] NFT Staking V2 contract deployed to: 0x0497e0F8FC07DaaAf2BC1da1eace3F5E60d008b8
 - [ETH Goerli] NFT Staking contract deployed to: 0xceED4Db9234e7374fe3132a2610c31275712685C
+- [ETH Goerli] NFT achievements contract deployed to: 0xFE8fc4CCC213928ffbA3D92013Da1537a80b2af4
 - [BSC Testnet] Yield Farming deployed to: 0x20034d860bf43ef6d6dded79a8d73e857e10960c
 - [BSC Testnet] Withdrawer contract deployed to: 0x9DAcEA338E4DDd856B152Ce553C7540DF920Bb15
 
